@@ -22,8 +22,8 @@ async function onLogin(e){
 
 document.addEventListener("DOMContentLoaded", ()=>{
   // Splash 3s
-  $("#atd-skip")?.addEventListener("click", ()=>{ hideSplash(); showLogin(); });
-  setTimeout(()=>{ hideSplash(); showLogin(); }, 3000);
+  
+  setTimeout(()=>{ showLogin(); }, 3000);
 
   // If session exists, go straight in
   try{ const s=JSON.parse(sessionStorage.getItem("AT_SESSION")); if(s){ window.location.href="./app/"; } }catch(_){}

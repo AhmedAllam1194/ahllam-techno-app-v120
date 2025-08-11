@@ -996,6 +996,30 @@ document.addEventListener('DOMContentLoaded', function(){
 <script type="module" src="app-data.js"></script>
 
 <script type="module" src="app-seed.js"></script>
+
+<!-- Bridge: bypass internal login/splash if external login is valid -->
+<script>
+(function(){
+  try{
+    const sess = sessionStorage.getItem("AT_SESSION");
+    if(!sess) return;
+    // Hide common app splash/login containers
+    const toHide = [
+      "#splash", ".splash", "#atd-splash", ".atd-splash",
+      "#login-overlay", ".login-overlay", "#login", ".login", "[data-role='login']"
+    ];
+    toHide.forEach(sel => document.querySelectorAll(sel).forEach(el => { el.style.display="none"; el.remove(); }));
+    // Enable main UI if it was dimmed/blocked
+    ["#app",".app","#root","#main"].forEach(sel => document.querySelectorAll(sel).forEach(el => {
+      el.classList.remove("hidden","is-locked");
+      el.style.filter=""; el.style.pointerEvents="";
+    }));
+    // Kick any app init if exists
+    (window.initApp||window.startApp||window.bootApp||function(){})();
+  }catch(e){ /* noop */ }
+})();
+</script>
+
 </body></div><div class="hd"><div class="chip">🛡️</div><div>إعدادات متقدمة — عناصر إضافية</div></div><div class="bd">
 <div class="filters">
 <input id="adv_pin_current" placeholder="PIN الحالي"/>
@@ -1401,5 +1425,29 @@ document.addEventListener('DOMContentLoaded', function(){
 <script type="module" src="app-data.js"></script>
 
 <script type="module" src="app-seed.js"></script>
+
+<!-- Bridge: bypass internal login/splash if external login is valid -->
+<script>
+(function(){
+  try{
+    const sess = sessionStorage.getItem("AT_SESSION");
+    if(!sess) return;
+    // Hide common app splash/login containers
+    const toHide = [
+      "#splash", ".splash", "#atd-splash", ".atd-splash",
+      "#login-overlay", ".login-overlay", "#login", ".login", "[data-role='login']"
+    ];
+    toHide.forEach(sel => document.querySelectorAll(sel).forEach(el => { el.style.display="none"; el.remove(); }));
+    // Enable main UI if it was dimmed/blocked
+    ["#app",".app","#root","#main"].forEach(sel => document.querySelectorAll(sel).forEach(el => {
+      el.classList.remove("hidden","is-locked");
+      el.style.filter=""; el.style.pointerEvents="";
+    }));
+    // Kick any app init if exists
+    (window.initApp||window.startApp||window.bootApp||function(){})();
+  }catch(e){ /* noop */ }
+})();
+</script>
+
 </body>
 </html>
